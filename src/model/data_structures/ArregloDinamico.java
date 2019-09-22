@@ -7,71 +7,84 @@ package model.data_structures;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico implements IArregloDinamico {
-		/**
-		 * Capacidad maxima del arreglo
-		 */
-        private int tamanoMax;
-		/**
-		 * Numero de elementos presentes en el arreglo (de forma compacta desde la posicion 0)
-		 */
-        private int tamanoAct;
-        /**
-         * Arreglo de elementos de tamaNo maximo
-         */
-        private String elementos[ ];
+public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamico<T> {
+	/**
+	 * Capacidad maxima del arreglo
+	 */
+	private int tamanoMax;
+	/**
+	 * Numero de elementos presentes en el arreglo (de forma compacta desde la posicion 0)
+	 */
+	private int tamanoAct;
+	/**
+	 * Arreglo de elementos de tamaNo maximo
+	 */
+	private T elementos[ ];
 
-        /**
-         * Construir un arreglo con la capacidad maxima inicial.
-         * @param max Capacidad maxima inicial
-         */
-		public ArregloDinamico( int max )
-        {
-               elementos = new String[max];
-               tamanoMax = max;
-               tamanoAct = 0;
-        }
-        
-		public void agregar( String dato )
-        {
-               if ( tamanoAct == tamanoMax )
-               {  // caso de arreglo lleno (aumentar tamaNo)
-                    tamanoMax = 2 * tamanoMax;
-                    String [ ] copia = elementos;
-                    elementos = new String[tamanoMax];
-                    for ( int i = 0; i < tamanoAct; i++)
-                    {
-                     	 elementos[i] = copia[i];
-                    } 
-            	    System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
-               }	
-               elementos[tamanoAct] = dato;
-               tamanoAct++;
-       }
+	/**
+	 * Construir un arreglo con la capacidad maxima inicial.
+	 * @param max Capacidad maxima inicial
+	 */
+	public ArregloDinamico( int max )
+	{
+		elementos = newArray(max);
+		tamanoMax = max;
+		tamanoAct = 0;
+	}
 
-		public int darCapacidad() {
-			return tamanoMax;
-		}
+	@SuppressWarnings("unchecked")
+	private T[] newArray(int size)
+	{
+		return (T[]) new Comparable[size]; 	
+	}
 
-		public int darTamano() {
-			return tamanoAct;
-		}
+	public void agregar( T dato )
+	{
+		if ( tamanoAct == tamanoMax )
+		{  // caso de arreglo lleno (aumentar tamaNo)
+			tamanoMax = 2 * tamanoMax;
+			T [ ] copia = elementos;
+			elementos =newArray(tamanoMax);
+			for ( int i = 0; i < tamanoAct; i++)
+			{
+				elementos[i] = copia[i];
+			} 
+			System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
+		}	
+		elementos[tamanoAct] = dato;
+		tamanoAct++;
+	}
 
-		public String darElemento(int i) {
-			// TODO implementar
-			return null;
-		}
+	public int darCapacidad() {
+		return tamanoMax;
+	}
 
-		public String buscar(String dato) {
-			// TODO implementar
-			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			return null;
-		}
+	public int darTamano() {
+		return tamanoAct;
+	}
 
-		public String eliminar(String dato) {
-			// TODO implementar
-			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			return null;
-		}
+	public void shellSort() 
+	{ 
+		int n = tamanoAct; 
+
+		for (int intervalo = n/2; intervalo > 0; intervalo /= 2) 
+		{ 
+			for (int i = intervalo; i < n; i += 1) 
+			{ 
+				T temp = elementos[i]; 
+				int j; 
+				for (j = i; j >= intervalo &&this.darElemento(j-intervalo).compareTo(temp)<0; j -= intervalo) {
+					elementos[j] = elementos[j - intervalo]; 
+				}
+
+				elementos[j] = temp; 
+			} 
+		} 
+
+	}
+	public T darElemento(int i) {
+
+		return elementos[i];
+	}
 
 }
