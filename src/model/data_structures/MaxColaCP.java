@@ -2,12 +2,13 @@ package model.data_structures;
 
 public class MaxColaCP<T extends Comparable<T>> implements IMaxColaCP<T>{
 
-	int tamanio;
+	private int tamanio;
 
-	NodoColaPrioritaria<T>cabeza;
+	private NodoColaPrioritaria<T>cabeza;
 
-	ArregloDinamico<T> listaOrganizada;
-
+	private ArregloDinamico<T> listaOrganizada;
+	private  NodoColaPrioritaria<T> ultimoAgregado;
+	private  NodoColaPrioritaria<T> primerNodo;
 	public MaxColaCP() {
 		cabeza=null;
 		tamanio=0;
@@ -21,18 +22,19 @@ public class MaxColaCP<T extends Comparable<T>> implements IMaxColaCP<T>{
 	}
 
 	public void agregar(T elem) {
-		NodoColaPrioritaria<T>agregado=new NodoColaPrioritaria<T>(elem);
-		if(tamanio==0) {
-			cabeza=agregado;
+		if(primerNodo==null){
+			primerNodo=new NodoColaPrioritaria<T>(elem);
+			ultimoAgregado = primerNodo;
 			tamanio++;
 		}
-		else {
-			NodoColaPrioritaria<T>actual=cabeza;
-			while(actual.darSiguiente()!=null) {
-				actual=actual.darSiguiente();
+		else{
+			if(ultimoAgregado.darSiguiente()==null)
+			{
+				NodoColaPrioritaria<T> nuevo = new NodoColaPrioritaria<T>(elem);
+				ultimoAgregado.cambiarSiguiente(nuevo);
+				ultimoAgregado = nuevo;
+				tamanio++;	
 			}
-			actual.cambiarSiguiente(agregado);
-			tamanio++;
 		}
 	}
 	public T sacarMax() {

@@ -6,7 +6,6 @@ public class NodoColaPrioritaria <T> implements INodoColaPrioritaria<T>{
 
 	private NodoColaPrioritaria<T>siguiente;
 
-	int prioridad;
 
 	public NodoColaPrioritaria(T elem){
 		llave=elem;
