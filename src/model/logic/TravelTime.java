@@ -1,4 +1,4 @@
-package model;
+package model.logic;
 
 public class TravelTime implements Comparable <TravelTime>
 {

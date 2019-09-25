@@ -117,6 +117,13 @@ public class MaxHeapCP<T extends Comparable<T>> {
 	public T darElementoPos(int i){
 		return heap[i];
 	}
+	public ArregloDinamico<T> pasarAArregloDinamico() {
+		ArregloDinamico<T> nuevo=new ArregloDinamico<T>(10000000);
+		for (int i = 0; i < heap.length; i++) {
+			nuevo.agregar(heap[i]);
+		}
+		return nuevo;
+	}
 
 
 }

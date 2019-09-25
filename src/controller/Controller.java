@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
-import model.Mundo;
+import model.logic.Mundo;
 import view.MVCView;
 
 public class Controller {
@@ -20,7 +20,7 @@ public class Controller {
 	public Controller ()
 	{
 		view = new MVCView();
-		mundo = new Mundo();
+		
 	}
 
 	public void run() 

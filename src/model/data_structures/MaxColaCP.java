@@ -5,10 +5,7 @@ public class MaxColaCP<T extends Comparable<T>> implements IMaxColaCP<T>{
 	private int tamanio;
 
 	private NodoColaPrioritaria<T>cabeza;
-
-	private ArregloDinamico<T> listaOrganizada;
 	private  NodoColaPrioritaria<T> ultimoAgregado;
-	private  NodoColaPrioritaria<T> primerNodo;
 	public MaxColaCP() {
 		cabeza=null;
 		tamanio=0;
@@ -22,9 +19,9 @@ public class MaxColaCP<T extends Comparable<T>> implements IMaxColaCP<T>{
 	}
 
 	public void agregar(T elem) {
-		if(primerNodo==null){
-			primerNodo=new NodoColaPrioritaria<T>(elem);
-			ultimoAgregado = primerNodo;
+		if(cabeza==null){
+			cabeza=new NodoColaPrioritaria<T>(elem);
+			ultimoAgregado = cabeza;
 			tamanio++;
 		}
 		else{
@@ -45,7 +42,7 @@ public class MaxColaCP<T extends Comparable<T>> implements IMaxColaCP<T>{
 		return eliminado;
 
 	}
-	
+
 	public T darMax() {
 		ArregloDinamico<T> ordenado=this.pasarAArregloDinamico(cabeza);
 		ordenado.shellSort();
@@ -88,4 +85,32 @@ public class MaxColaCP<T extends Comparable<T>> implements IMaxColaCP<T>{
 		return eliminado;
 	}
 
+	public T darElemento(int i) {
+		T buscado=null;
+		if(i==0){
+			buscado=cabeza.getLlave();
+		}
+		else{
+			NodoColaPrioritaria<T>actual=cabeza;
+			int pos=0;
+			boolean encontrado=false;
+			while(actual.darSiguiente()!=null&&!encontrado){
+				if(pos+1==i){
+					buscado=actual.darSiguiente().getLlave();
+					encontrado=true;
+				}
+				else{
+					actual=actual.darSiguiente();
+					pos++;
+				}
+			}
+		}
+		return buscado;
+
+		
+	}
+	
+	public NodoColaPrioritaria<T>darCabeza(){
+		return cabeza;
+	}
 }
