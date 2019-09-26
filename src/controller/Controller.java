@@ -39,16 +39,20 @@ public class Controller {
 			case 1:
 				try
 				{
-					mundo.LoadTravelTimes();	
+					mundo = new Mundo();	
 				}
 				catch(Exception e)
 				{
-					System.out.println(e);
+					e.printStackTrace();
 				}
 
 				break;
 
 			case 2: 
+				System.out.println(mundo.generarMuestra(20));
+				System.out.println(mundo.generarMuestraHeap(21));
+				System.out.println("Se tomó la muestra correctamente");
+			case 3: 
 				System.out.println("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();
 				fin = true;

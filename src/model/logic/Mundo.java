@@ -63,10 +63,9 @@ public class Mundo
 
 	public MaxColaCP<TravelTime>generarMuestra(int cantidad){
 		MaxColaCP<TravelTime>muestra=new MaxColaCP<TravelTime>();	
-		while(cantidad>0) {
+		while(cantidad>=0) {
 			double x = (Math.random()*((colaCP.darNumElementos()+1))); 
 			int pos=(int) Math.round(x);
-			System.out.println(pos);
 			muestra.agregar(colaCP.darElemento(pos));
 			cantidad--;
 		}
@@ -75,11 +74,10 @@ public class Mundo
 	
 	public MaxHeapCP<TravelTime>generarMuestraHeap(int cantidad){
 		MaxHeapCP<TravelTime>muestra=new MaxHeapCP<TravelTime>(cantidad);	
-		while(cantidad>0) {
-			double x = (Math.random()*((colaCP.darNumElementos()+1))); 
+		while(cantidad>=0) {
+			double x = (Math.random()*((colaHeap.darNumElementos())-1)); 
 			int pos=(int) Math.round(x);
-			System.out.println(pos);
-			muestra.agregar(colaCP.darElemento(pos));
+			muestra.agregar(colaHeap.darElementoPos(pos));
 			cantidad--;
 		}
 		return muestra;
