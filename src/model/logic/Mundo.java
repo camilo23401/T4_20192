@@ -62,25 +62,28 @@ public class Mundo
 	}
 
 	public MaxColaCP<TravelTime>generarMuestra(int cantidad){
-		MaxColaCP<TravelTime>muestra=new MaxColaCP<TravelTime>();	
-		while(cantidad>=0) {
+		MaxColaCP<TravelTime>muestra=new MaxColaCP<TravelTime>();
+		ArregloDinamico<TravelTime> lista=colaCP.pasarAArregloDinamico(colaCP.darCabeza());
+		while(cantidad>0) {
 			double x = (Math.random()*((colaCP.darNumElementos()+1))); 
 			int pos=(int) Math.round(x);
-			muestra.agregar(colaCP.darElemento(pos));
+			muestra.agregar(lista.darElemento(pos));
 			cantidad--;
 		}
+		
 		return muestra;
 	}
 	
 	public MaxHeapCP<TravelTime>generarMuestraHeap(int cantidad){
-		MaxHeapCP<TravelTime>muestra=new MaxHeapCP<TravelTime>(cantidad);	
-		while(cantidad>=0) {
-			double x = (Math.random()*((colaHeap.darNumElementos())-1)); 
+		MaxHeapCP<TravelTime>muestra=new MaxHeapCP<TravelTime>(2000000);	
+		while(cantidad>0) {
+			double x = (Math.random()*((colaHeap.darNumElementos()+1))); 
 			int pos=(int) Math.round(x);
 			muestra.agregar(colaHeap.darElementoPos(pos));
 			cantidad--;
 		}
 		return muestra;
+		
 	}
 	
 	public MaxColaCP<TravelTime> darColaCP() {
@@ -91,16 +94,7 @@ public class Mundo
 		return colaHeap;
 	}
 	
-	public MaxColaCP<TravelTime>viajesEntreHorasCP(int hInicial,int hFinal) {
-		MaxColaCP<TravelTime>retorno=new MaxColaCP<TravelTime>();
-		for (int i = 0; i < colaCP.darNumElementos(); i++) {
-			TravelTime actual=colaCP.darElemento(i);
-			if(actual.darHod()>hInicial&&actual.darHod()<hFinal) {
-				retorno.agregar(actual);
-			}
-		}
-		return retorno;
-	}
+
 	public MaxColaCP<TravelTime>viajesEntreHorasCola(int hInicial,int hFinal) {
 		MaxColaCP<TravelTime>retorno=new MaxColaCP<TravelTime>();
 		for (int i = 0; i < colaCP.darNumElementos(); i++) {

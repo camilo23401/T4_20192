@@ -51,7 +51,7 @@ public class MaxColaCP<T extends Comparable<T>> implements IMaxColaCP<T>{
 
 	}
 	public ArregloDinamico<T> pasarAArregloDinamico(NodoColaPrioritaria<T>actual) {
-		ArregloDinamico<T> nuevo=new ArregloDinamico<T>(10000000);
+		ArregloDinamico<T> nuevo=new ArregloDinamico<T>(25000000);
 		while(actual!=null)
 		{
 			T viajeActual = actual.getLlave();

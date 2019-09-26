@@ -49,8 +49,8 @@ public class Controller {
 				break;
 
 			case 2: 
-				System.out.println(mundo.generarMuestra(20));
-				System.out.println(mundo.generarMuestraHeap(21));
+				mundo.generarMuestraHeap(200000);
+				mundo.generarMuestra(200000);
 				System.out.println("Se tomó la muestra correctamente");
 			case 3: 
 				System.out.println("--------- \n Hasta pronto !! \n---------"); 
